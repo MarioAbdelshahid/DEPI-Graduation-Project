@@ -1,0 +1,78 @@
+/* General Styles */
+body {
+  margin: 0;
+  font-family: 'Arial', sans-serif;
+}
+
+.header-container {
+  background-color: #11223d; /* Dark background */
+  color: white;
+  padding: 15px 20px; /* Padding for the header */
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1); /* Subtle shadow */
+}
+
+.header-inner-container {
+  display: flex;
+  justify-content: space-between; /* Space between logo and nav */
+  align-items: center; /* Center items vertically */
+  max-width: 1200px; /* Max width for the header */
+  margin: 0 auto; /* Center the container */
+  width: 100%; /* Make sure it takes the full width */
+}
+
+.header-logo {
+  font-size: 24px;
+  font-weight: bold;
+  color: #1A82A7; /* Logo color */
+  cursor: pointer; /* Pointer cursor on hover */
+}
+
+/* Navigation styles */
+.header-nav {
+  display: flex;
+  align-items: center; /* Center items vertically */
+}
+
+/* User info */
+.user-info {
+  display: flex;
+  align-items: center; /* Center items vertically */
+}
+
+.user-email {
+  margin-right: 20px; /* Spacing between email and logout button */
+}
+
+.logout-button {
+  background-color: #FF4C4C; /* Red background for logout */
+  color: white;
+  border: none;
+  border-radius: 5px; /* Rounded corners */
+  padding: 10px 15px; /* Padding for the button */
+  cursor: pointer; /* Pointer cursor on hover */
+  transition: background-color 0.3s ease; /* Smooth transition */
+}
+
+.logout-button:hover {
+  background-color: #ff1a1a; /* Darker red on hover */
+}
+
+/* Auth links styles */
+.auth-links {
+  display: flex;
+  align-items: center; /* Center items vertically */
+  margin-right: -200px;
+}
+
+.login-link,
+.signup-link {
+  color: white;
+  text-decoration: none; /* Remove underline */
+  margin: 0 10px; /* Spacing between links */
+  transition: color 0.3s ease; /* Smooth color transition */
+}
+
+.login-link:hover,
+.signup-link:hover {
+  color: #1A82A7; /* Change color on hover */
+}
