@@ -3,13 +3,13 @@ import { useAuthContext } from './useAuthContext';
 import axios from 'axios';
 
 export const useSignup = () => {
-  const [error, setError] = useState(null);
-  const [isLoading, setIsLoading] = useState(false);
+  const [errorTwo, setErrorTwo] = useState(null);
+  const [isLoadingTwo, setIsLoadingTwo] = useState(null);
   const { dispatch } = useAuthContext();
 
   const signup = async (name, email, password) => {
-    setIsLoading(true);
-    setError(null);
+    setIsLoadingTwo(true);
+    setErrorTwo(null);
 
     try {
       const response = await axios.post('http://localhost:4000/api/user/signup', {
@@ -25,12 +25,12 @@ export const useSignup = () => {
       dispatch({ type: 'LOGIN', payload: response.data });
 
       // update loading state
-      setIsLoading(false);
+      setIsLoadingTwo(false);
     } catch (err) {
-      setIsLoading(false);
-      setError(err.response.data.error || 'An error occurred. Please try again.');
+      setIsLoadingTwo(false);
+      setErrorTwo(err.response.data.error || 'An error occurred. Please try again.');
     }
   };
 
-  return { signup, isLoading, error };
+  return { signup, isLoadingTwo, errorTwo };
 };

@@ -25,7 +25,7 @@ const Header = () => {
           <nav className='header-nav'>
             {user ? (
               <div className='user-info'>
-                <div className='user-email'><span>{user.email}</span></div>
+                <div className='user-email'><span>Welcome, {user.name}</span></div>
                 <button onClick={handleClick} className='logout-button'>Log out</button>
               </div>
             ) : (
