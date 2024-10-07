@@ -8,9 +8,9 @@ const authMiddleware = require('../middleware/requireAuth.js');
 const router = express.Router();
 
 // Create a page
-router.post('/', authMiddleware, createPage)
+router.post('/createPages', authMiddleware, createPage)
 
 // Delete a page
-router.delete('/:pageID', authMiddleware, deletePage)
+router.delete('/deletePage/:pageID', authMiddleware, deletePage)
 
 module.exports = router

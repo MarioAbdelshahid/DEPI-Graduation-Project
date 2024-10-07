@@ -59,7 +59,6 @@ exports.deleteComment = async (req, res) => {
 };
 
 
-const Comment = require('../models/commentModel');
 
 // Like/Unlike a comment
 exports.commentLike = async (req, res) => {

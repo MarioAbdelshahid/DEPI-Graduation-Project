@@ -8,12 +8,12 @@ const authMiddleware = require('../middleware/requireAuth.js');
 const router = express.Router();
 
 // Create a comment
-router.post('/', authMiddleware, createComment); 
+router.post('/createComments', authMiddleware, createComment); 
 
 // Delete a comment
-router.delete('/:commentID', authMiddleware, deleteComment); 
+router.delete('/deleteCommments/:commentID', authMiddleware, deleteComment); 
 
 // Like/Unlike a comment
-router.post('/:commentID/like', authMiddleware, commentLike); 
+router.post('/likeComments/:commentID/like', authMiddleware, commentLike); 
 
 module.exports = router

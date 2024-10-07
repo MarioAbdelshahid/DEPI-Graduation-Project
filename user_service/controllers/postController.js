@@ -3,6 +3,7 @@ const Page = require('../models/pageModel')
 const User = require('../models/userModel')
 const Comment = require('../models/commentModel')
 
+
 // Create a new post
 exports.createPost = async (req, res) => {
   try {
@@ -21,7 +22,7 @@ exports.createPost = async (req, res) => {
 
     // Save post
     await post.save();
-    res.status(201).json({ message: 'Post created successfully', post });
+    res.status(201).json({ message: 'Post created successfully', post,id: post._id });
   } catch (error) {
     res.status(500).json({ error: 'Failed to create post' });
   }
@@ -59,6 +60,7 @@ exports.deletePost = async (req, res) => {
 // Like/Unlike a post
 exports.postLike = async (req, res) => {
   try {
+    const userId = req.user.id;
     const post = await Post.findById(req.params.postID);
     if (!post) return res.status(404).json({ message: 'Post not found' });
 
@@ -81,3 +83,25 @@ exports.postLike = async (req, res) => {
     res.status(500).json({ error: 'Server error: Failed to like post' });
   }
 };
+
+exports.getPostsByPage = async (req, res) => {
+  try {
+      const posts = await Post.find({ page: req.params.pageID }); // Adjust as necessary
+      res.status(200).json(posts);
+  } catch (error) {
+      console.error(error);
+      res.status(500).json({ error: 'Failed to retrieve posts' });
+  }
+};
+
+exports.getAllPostsByUser = async (req, res) => {
+  const { userID } = req.params;
+
+  try {
+    const posts = await Post.find({ postedBy: userID }); // Query to find posts by userID
+    res.status(200).json(posts);
+  } catch (error) {
+    res.status(500).json({ error: 'Failed to retrieve posts' });
+  }
+};
+
