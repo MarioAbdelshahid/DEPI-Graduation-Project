@@ -57,7 +57,7 @@ const Login = () => {
                             value={signUpPassword}
                         />
                         <div>
-                            <button disabled={isLoadingTwo}>Sign Upp</button>
+                            <button disabled={isLoadingTwo}>Sign Up</button>
                             {errorTwo && <div className="error">{errorTwo}</div>}
                         </div>
                     </form>
