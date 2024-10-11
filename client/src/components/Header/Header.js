@@ -12,7 +12,7 @@ import {
   WorkOutline,
   Event,
   School,
-} from "@material-ui/icons";
+} from '@mui/icons-material';
 
 const Header = () => {
   const { logout } = useLogout();

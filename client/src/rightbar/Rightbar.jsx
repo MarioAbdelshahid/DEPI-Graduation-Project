@@ -2,7 +2,7 @@ import './rightbar.css';
 import { Settings, Bookmark, Person, Mail, EventNote } from '@mui/icons-material';
 import { Link } from 'react-router-dom';
 import Online from "../online/Online";
-import dummyData from '../dummyData'; // Adjust the path as necessary
+// import dummyData from '../dummyData'; // Adjust the path as necessary
 
 
 
