@@ -1,0 +1,65 @@
+.profile {
+    display: flex;
+    padding: 20px; /* إضافة مسافة حول المحتوى */
+}
+
+.profileRight {
+    flex: 9;
+    display: flex;
+    flex-direction: column; /* عرض العناصر في عمود */
+}
+
+.profileCover {
+    height: 320px;
+    position: relative;
+    margin-bottom: 20px; /* مسافة بين الغلاف والمحتوى أدناه */
+    border-radius: 10px; /* زوايا دائرية للغلاف */
+    overflow: hidden; /* لإخفاء العناصر الزائدة */
+}
+
+.profileCoverImg {
+    width: 100%;
+    height: 250px;
+    object-fit: cover;
+    border-radius: 10px; /* زوايا دائرية للغلاف */
+}
+
+.profileUserImg {
+    width: 150px;
+    height: 150px;
+    border-radius: 50%;
+    object-fit: cover;
+    position: absolute;
+    left: 0;
+    right: 0;
+    margin: auto;
+    top: 150px;
+    border: 4px solid white; /* زيادة سمك الحدود */
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.2); /* إضافة ظل للصورة */
+}
+
+.profileInfo {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    margin-top: 10px; /* مسافة أعلى المعلومات */
+}
+
+.profileInfoName {
+    font-size: 28px; /* زيادة حجم النص */
+    font-weight: bold; /* جعل النص عريض */
+    color: #333; /* لون نص داكن */
+}
+
+.profileInfoDesc {
+    font-weight: 300;
+    color: #666; /* لون نص أخف */
+    margin-top: 5px; /* مسافة أعلى الوصف */
+}
+
+.profileRightBottom {
+    display: flex;
+    margin-top: 20px; /* مسافة أعلى قسم المحتوى */
+    justify-content: space-between; /* توزيع العناصر بشكل متساوي */
+}
