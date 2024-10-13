@@ -1,5 +1,5 @@
 import "./UpdatePostModal.css";
-import { toast, ToastContainer } from "react-toastify";
+import { ToastContainer } from "react-toastify";
 import { useState } from "react";
 
 const UpdatePostModal = ({ setUpdatePost, post }) => {

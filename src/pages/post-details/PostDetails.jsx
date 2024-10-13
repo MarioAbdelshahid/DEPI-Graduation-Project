@@ -4,7 +4,7 @@ import { useEffect, useState } from "react";
  import CommentList from "../../components/comments/CommentList";
 import { posts } from "../../dummyData";
 import "./PostDetails.css";
-// import UpdatePostModal from "./UpdatePostModal.jsx";
+ //import UpdatePostModal from "./UpdatePostModel";
 import { toast } from "react-toastify";
  import swal from "sweetalert";
 
@@ -95,13 +95,13 @@ const PostDetails = () => {
           <i className="bi bi-hand-thumbs-up"></i>
           <small>{post.likes.length} likes</small>
         </div>
-        {/* <div>
-          <i
+        <div>
+          {/* <i
             onClick={() => setUpdatePost(true)}
             className="bi bi-pencil-square"
-          ></i>
+          ></i> */}
           <i onClick={deletePostHandler} className="bi bi-trash-fill"></i>
-        </div> */}
+        </div>
       </div>
       <AddComment />
       <CommentList />
