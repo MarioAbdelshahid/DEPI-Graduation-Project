@@ -72,3 +72,12 @@ exports.deletePage = async (req, res) => {
   }
 };
 
+// exports.searchPage = async (req, res) => {
+//   const { search } = req.query;
+//   try {
+//     const pages = await Page.find(search ? { name: { $regex: search, $options: 'i' } } : {});
+//     res.json(pages);
+//   } catch (err) {
+//     res.status(500).json({ message: 'Failed to fetch pages' });
+//   }
+// };

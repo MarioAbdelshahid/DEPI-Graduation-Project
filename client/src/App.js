@@ -1,5 +1,7 @@
+import React from 'react';
 import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom';
 import { useAuthContext } from './hooks/useAuthContext';
+import { ThemeContext, ThemeProvider } from './context/ThemeContext'; 
 
 import Header from './components/Header/Header';
 import CreatePost from './components/CreatePost/CreatePost';
@@ -11,17 +13,14 @@ import Dashboard from './pages/Dashboard';
 
 import './App.css';
 
-
-// import Rightbar from './rightbar/Rightbar';
-
 function App() {
   const { user } = useAuthContext();
+  const { theme } = React.useContext(ThemeContext); 
 
   return (
-    <BrowserRouter>
-      <Header />
-      <div className="appContainer"> 
-        {/* <Rightbar profile={false} />  */}
+    <div className={`appContainer ${theme}`}> 
+      <BrowserRouter>
+        <Header />
         <Routes>
           <Route 
             path="/" 
@@ -44,9 +43,15 @@ function App() {
             element={user ? <CreatePost /> : <Navigate to="/login" />} 
           />
         </Routes>
-      </div>
-    </BrowserRouter>
+      </BrowserRouter>
+    </div>
   );
 }
 
-export default App;
+export default function Root() {
+  return (
+    <ThemeProvider> 
+      <App />
+    </ThemeProvider>
+  );
+}

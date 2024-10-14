@@ -1,78 +1,149 @@
-General Styles
-body {
-  margin: 0;
-  font-family: 'Arial', sans-serif;
-}
 
 .header-container {
-  background-color: #11223d; /* Dark background */
-  color: white;
-  padding: 15px 20px; /* Padding for the header */
-  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1); /* Subtle shadow */
+  background-color: #ffffff; /* Background color for the header */
+  border-bottom: 1px solid #ccc; /* Bottom border */
+  padding: 10px 20px; /* Padding for the header */
 }
 
 .header-inner-container {
   display: flex;
-  justify-content: space-between; /* Space between logo and nav */
   align-items: center; /* Center items vertically */
-  max-width: 1200px; /* Max width for the header */
-  margin: 0 auto; /* Center the container */
-  width: 100%; /* Make sure it takes the full width */
+  justify-content: space-between; /* Space between elements */
 }
 
 .header-logo {
-  font-size: 24px;
-  font-weight: bold;
-  color: #1A82A7; /* Logo color */
-  cursor: pointer; /* Pointer cursor on hover */
+  font-size: 24px; /* Logo font size */
+  font-weight: bold; /* Bold logo */
+  color: #333; /* Logo color */
+  cursor: pointer; /* Change cursor to pointer on hover */
 }
 
-/* Navigation styles */
 .header-nav {
   display: flex;
   align-items: center; /* Center items vertically */
 }
 
-/* User info */
+.search-container {
+  margin: 0 20px; /* Margin around the search bar */
+  flex-grow: 1; /* Allow search bar to grow and fill space */
+}
+
+.search-input {
+  width: 100%; /* Full width of the container */
+  padding: 8px; /* Padding for the search input */
+  border: 1px solid #ccc; /* Border around the input */
+  border-radius: 4px; /* Rounded corners */
+}
+
+.create-dropdown {
+  position: relative; /* Position relative for dropdown positioning */
+  margin-right: 20px; /* Margin for spacing */
+}
+
+.create-button {
+  padding: 8px 12px; /* Button padding */
+  border: none; /* Remove default border */
+  background-color: #007bff; /* Button background color */
+  color: white; /* Button text color */
+  border-radius: 4px; /* Rounded corners */
+  cursor: pointer; /* Change cursor to pointer on hover */
+}
+
+.create-button:hover {
+  background-color: #0056b3; /* Darker shade on hover */
+}
+
+.dropdown-menu {
+  position: absolute; /* Absolute positioning for dropdown */
+  top: 100%; /* Position below the button */
+  left: 0; /* Align left */
+  background: white; /* Background color */
+  border: 1px solid #ccc; /* Border for dropdown */
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1); /* Shadow for dropdown */
+  z-index: 1000; /* Ensure dropdown appears above other elements */
+  min-width: 160px; /* Minimum width */
+}
+
+.dropdown-item {
+  display: block; /* Each item takes full width */
+  padding: 10px 15px; /* Padding for dropdown items */
+  text-decoration: none; /* Remove underline */
+  color: #333; /* Text color */
+}
+
+.dropdown-item:hover {
+  background: #f0f0f0; /* Highlight on hover */
+}
+
+.profile-dropdown {
+  position: relative; /* Position relative for dropdown positioning */
+  margin-right: 20px; /* Margin for spacing */
+}
+
+.profile-button {
+  padding: 8px 12px; /* Button padding */
+  border: none; /* Remove default border */
+  background-color: transparent; /* Transparent background */
+  color: #333; /* Text color */
+  cursor: pointer; /* Change cursor to pointer on hover */
+}
+
 .user-info {
-  display: flex;
+  display: flex; /* Flexbox layout for user info */
   align-items: center; /* Center items vertically */
 }
 
 .user-email {
-  margin-right: 20px; /* Spacing between email and logout button */
+  margin-right: 20px; /* Space between email and logout button */
+  font-weight: 500; /* Bold email */
 }
 
 .logout-button {
-  background-color: #FF4C4C; /* Red background for logout */
-  color: white;
-  border: none;
-  border-radius: 5px; /* Rounded corners */
-  padding: 10px 15px; /* Padding for the button */
-  cursor: pointer; /* Pointer cursor on hover */
-  transition: background-color 0.3s ease; /* Smooth transition */
+  background-color: transparent; /* Transparent background */
+  border: none; /* Remove default border */
+  color: #d9534f; /* Logout button color */
+  cursor: pointer; /* Change cursor to pointer on hover */
 }
 
-.logout-button:hover {
-  background-color: #ff1a1a; /* Darker red on hover */
+.dark-mode-toggle {
+  margin-left: 20px; /* Margin for spacing */
+  background: none; /* No background */
+  border: none; /* No border */
+  color: #007bff; /* Dark mode button color */
+  cursor: pointer; /* Change cursor to pointer */
 }
 
-/* Auth links styles */
 .auth-links {
-  display: flex;
-  align-items: center; /* Center items vertically */
-  margin-right: -200px;
+  display: flex; /* Flex layout for auth links */
 }
 
-.login-link,
-.signup-link {
-  color: white;
+.login-link, .signup-link {
+  margin-left: 10px; /* Space between links */
   text-decoration: none; /* Remove underline */
-  margin: 0 10px; /* Spacing between links */
-  transition: color 0.3s ease; /* Smooth color transition */
+  color: #007bff; /* Link color */
 }
 
-.login-link:hover,
-.signup-link:hover {
-  color: #1A82A7; /* Change color on hover */
+.login-link:hover, .signup-link:hover {
+  text-decoration: underline; /* Underline on hover */
+}
+
+/* Responsive styles */
+@media (max-width: 768px) {
+  .header-inner-container {
+    flex-direction: column; /* Stack elements vertically */
+    align-items: flex-start; /* Align items to the start */
+  }
+
+  .search-container {
+    margin: 10px 0; /* Margin for search on mobile */
+    width: 100%; /* Full width on mobile */
+  }
+
+  .header-nav {
+    flex-wrap: wrap; /* Allow wrapping */
+  }
+
+  .user-info {
+    margin-top: 10px; /* Space between user info and other elements */
+  }
 }

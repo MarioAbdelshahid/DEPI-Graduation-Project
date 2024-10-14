@@ -13,4 +13,6 @@ router.post('/createPages', authMiddleware, createPage)
 // Delete a page
 router.delete('/deletePage/:pageID', authMiddleware, deletePage)
 
+// router.get('/searchPage', authMiddleware, searchPage)
+
 module.exports = router

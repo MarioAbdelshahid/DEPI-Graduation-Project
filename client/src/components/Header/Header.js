@@ -164,35 +164,31 @@
 // };
 
 // export default Header;
-
 import { Link } from 'react-router-dom';
 import { useLogout } from '../../hooks/useLogout';
 import { useAuthContext } from '../../hooks/useAuthContext';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import './Header.css';
 
-const Header = ({onSearch}) => {
+const Header = ({ onSearch }) => {
   const { logout } = useLogout();
   const { user } = useAuthContext();
 
   const [isDarkMode, setIsDarkMode] = useState(false);
   const [dropdownOpen, setDropdownOpen] = useState(false);
   const [profileDropdownOpen, setProfileDropdownOpen] = useState(false);
-  // const [searchTerm, setSearchTerm] = useState('');
 
   const handleClick = () => {
     logout();
   };
 
-  // const handleSearch = (event) => {
-  //   const value = event.target.value;
-  //   setSearchTerm(value);
-  //   onSearch(value); 
-  // };
-
   const toggleDarkMode = () => {
-    setIsDarkMode(!isDarkMode);
-    document.documentElement.setAttribute('data-theme', isDarkMode ? 'light' : 'dark');
+    setIsDarkMode((prevMode) => {
+      const newMode = !prevMode;
+      // Update the body class based on the new mode
+      document.body.className = newMode ? 'dark' : 'light'; // Set body class for theme
+      return newMode; // Return new mode for state
+    });
   };
 
   const toggleCreateDropdown = () => {
@@ -203,22 +199,20 @@ const Header = ({onSearch}) => {
     setProfileDropdownOpen(!profileDropdownOpen);
   };
 
+  // Ensure the correct class is applied to the body on mount
+  useEffect(() => {
+    document.body.className = isDarkMode ? 'dark' : 'light'; // Set initial theme class on mount
+  }, []);
+
   return (
     <div className='header-container'>
       <header>
         <div className="header-inner-container">
-
-
-
           <nav className='header-nav'>
             {user ? (
-              
               <div className='user-info'>
-
                 <Link to="/dashboard">
-                  <div className='header-logo'>
-                    InstaSUI
-                  </div>
+                  <div className='header-logo'>InstaSUI</div>
                 </Link>
 
                 <div className="search-container">
@@ -246,7 +240,9 @@ const Header = ({onSearch}) => {
                   {profileDropdownOpen && (
                     <div className="dropdown-menu">
                       <Link to="/" className="dropdown-item">View Profile</Link>
-                      <button onClick={toggleDarkMode} className='dark-mode-toggle'>{isDarkMode ? 'Light Mode' : 'Dark Mode'}</button>
+                      <button onClick={toggleDarkMode} className='dark-mode-toggle'>
+                        {isDarkMode ? 'Light Mode' : 'Dark Mode'}
+                      </button>
                       <button onClick={handleClick} className='logout-button'>Log out</button>
                     </div>
                   )}
@@ -262,25 +258,6 @@ const Header = ({onSearch}) => {
               </div>
             )}
           </nav>
-
-
-          {/* <nav className='header-nav'>
-            {user ? (
-              <div className='user-info'>
-                <Link to="/dashboard" className='nav-link'>Home</Link>
-                <div className='user-email'><span>Welcome, {user.name}</span></div>
-                <Link to="/" className='nav-link'>User-Feed</Link>
-                <button onClick={handleClick} className='logout-button'>Log out</button>
-              </div>
-            ) : (
-              <div className='auth-links'>
-                <div className='login-link'>
-                  <Link to="/login">Login</Link>
-                </div>
-                <Link to="/login" className='signup-link'>Signup</Link>
-              </div>
-            )}
-          </nav> */}
         </div>
       </header>
     </div>
@@ -288,153 +265,3 @@ const Header = ({onSearch}) => {
 };
 
 export default Header;
-
-//  THIS IS THE ALTERNATE HEADER'S **CSS CODE**
-// .header-container {
-//   background-color: #ffffff; /* Background color for the header */
-//   border-bottom: 1px solid #ccc; /* Bottom border */
-//   padding: 10px 20px; /* Padding for the header */
-// }
-
-// .header-inner-container {
-//   display: flex;
-//   align-items: center; /* Center items vertically */
-//   justify-content: space-between; /* Space between elements */
-// }
-
-// .header-logo {
-//   font-size: 24px; /* Logo font size */
-//   font-weight: bold; /* Bold logo */
-//   color: #333; /* Logo color */
-//   cursor: pointer; /* Change cursor to pointer on hover */
-// }
-
-// .header-nav {
-//   display: flex;
-//   align-items: center; /* Center items vertically */
-// }
-
-// .search-container {
-//   margin: 0 20px; /* Margin around the search bar */
-//   flex-grow: 1; /* Allow search bar to grow and fill space */
-// }
-
-// .search-input {
-//   width: 100%; /* Full width of the container */
-//   padding: 8px; /* Padding for the search input */
-//   border: 1px solid #ccc; /* Border around the input */
-//   border-radius: 4px; /* Rounded corners */
-// }
-
-// .create-dropdown {
-//   position: relative; /* Position relative for dropdown positioning */
-//   margin-right: 20px; /* Margin for spacing */
-// }
-
-// .create-button {
-//   padding: 8px 12px; /* Button padding */
-//   border: none; /* Remove default border */
-//   background-color: #007bff; /* Button background color */
-//   color: white; /* Button text color */
-//   border-radius: 4px; /* Rounded corners */
-//   cursor: pointer; /* Change cursor to pointer on hover */
-// }
-
-// .create-button:hover {
-//   background-color: #0056b3; /* Darker shade on hover */
-// }
-
-// .dropdown-menu {
-//   position: absolute; /* Absolute positioning for dropdown */
-//   top: 100%; /* Position below the button */
-//   left: 0; /* Align left */
-//   background: white; /* Background color */
-//   border: 1px solid #ccc; /* Border for dropdown */
-//   box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1); /* Shadow for dropdown */
-//   z-index: 1000; /* Ensure dropdown appears above other elements */
-//   min-width: 160px; /* Minimum width */
-// }
-
-// .dropdown-item {
-//   display: block; /* Each item takes full width */
-//   padding: 10px 15px; /* Padding for dropdown items */
-//   text-decoration: none; /* Remove underline */
-//   color: #333; /* Text color */
-// }
-
-// .dropdown-item:hover {
-//   background: #f0f0f0; /* Highlight on hover */
-// }
-
-// .profile-dropdown {
-//   position: relative; /* Position relative for dropdown positioning */
-//   margin-right: 20px; /* Margin for spacing */
-// }
-
-// .profile-button {
-//   padding: 8px 12px; /* Button padding */
-//   border: none; /* Remove default border */
-//   background-color: transparent; /* Transparent background */
-//   color: #333; /* Text color */
-//   cursor: pointer; /* Change cursor to pointer on hover */
-// }
-
-// .user-info {
-//   display: flex; /* Flexbox layout for user info */
-//   align-items: center; /* Center items vertically */
-// }
-
-// .user-email {
-//   margin-right: 20px; /* Space between email and logout button */
-//   font-weight: 500; /* Bold email */
-// }
-
-// .logout-button {
-//   background-color: transparent; /* Transparent background */
-//   border: none; /* Remove default border */
-//   color: #d9534f; /* Logout button color */
-//   cursor: pointer; /* Change cursor to pointer on hover */
-// }
-
-// .dark-mode-toggle {
-//   margin-left: 20px; /* Margin for spacing */
-//   background: none; /* No background */
-//   border: none; /* No border */
-//   color: #007bff; /* Dark mode button color */
-//   cursor: pointer; /* Change cursor to pointer */
-// }
-
-// .auth-links {
-//   display: flex; /* Flex layout for auth links */
-// }
-
-// .login-link, .signup-link {
-//   margin-left: 10px; /* Space between links */
-//   text-decoration: none; /* Remove underline */
-//   color: #007bff; /* Link color */
-// }
-
-// .login-link:hover, .signup-link:hover {
-//   text-decoration: underline; /* Underline on hover */
-// }
-
-// /* Responsive styles */
-// @media (max-width: 768px) {
-//   .header-inner-container {
-//     flex-direction: column; /* Stack elements vertically */
-//     align-items: flex-start; /* Align items to the start */
-//   }
-
-//   .search-container {
-//     margin: 10px 0; /* Margin for search on mobile */
-//     width: 100%; /* Full width on mobile */
-//   }
-
-//   .header-nav {
-//     flex-wrap: wrap; /* Allow wrapping */
-//   }
-
-//   .user-info {
-//     margin-top: 10px; /* Space between user info and other elements */
-//   }
-// }

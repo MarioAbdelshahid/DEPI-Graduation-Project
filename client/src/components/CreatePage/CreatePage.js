@@ -1,30 +1,38 @@
 import React, { useState } from 'react';
 import axios from 'axios';
-import './CreatePage.css'; 
+import './CreatePage.css';
 
 const CreatePage = ({ onPageCreated }) => {
-  const [name, setName] = useState('');
-  const [description, setDescription] = useState('');
-  const [error, setError] = useState('');
+  const [pageName, setPageName] = useState(''); // Handle page name input
+  const [pageDescription, setPageDescription] = useState(''); // Handle description input
+  const [error, setError] = useState(''); // Error handling
+  const token = localStorage.getItem('token'); // Retrieve the token for authorization
 
-  const handleSubmit = async (e) => {
-    e.preventDefault();
-    setError('');
+  // Handle form submission
+  const createPage = async (e) => {
+    e.preventDefault(); // Prevent page reload on form submission
+    setError(''); // Clear previous error messages
+
+    const newPage = {
+      name: pageName,
+      description: pageDescription,
+    };
 
     try {
-      const response = await axios.post('http://localhost:4000/api/pages', {
-        name,
-        description,
+      await axios.post('http://localhost:4000/api/page/createPages', newPage, {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
       });
 
-      // Call the callback to refresh or do something after creating the page
-      if (onPageCreated) {
-        onPageCreated(response.data);
-      }
+      // Clear form fields after successful creation
+      setPageName('');
+      setPageDescription('');
 
-      // Reset the form
-      setName('');
-      setDescription('');
+      // Call the callback function to notify parent component
+      if (onPageCreated) {
+        onPageCreated(); // You can pass additional info like the new page data if needed
+      }
     } catch (err) {
       setError('Failed to create page. Please try again.');
     }
@@ -34,14 +42,14 @@ const CreatePage = ({ onPageCreated }) => {
     <div className="create-page-container">
       <h2>Create New Page</h2>
       {error && <p className="error">{error}</p>}
-      <form onSubmit={handleSubmit}>
+      <form onSubmit={createPage}>
         <div>
           <label htmlFor="pageName">Page Name:</label>
           <input
             type="text"
             id="pageName"
-            value={name}
-            onChange={(e) => setName(e.target.value)}
+            value={pageName}
+            onChange={(e) => setPageName(e.target.value)}
             required
           />
         </div>
@@ -49,8 +57,8 @@ const CreatePage = ({ onPageCreated }) => {
           <label htmlFor="pageDescription">Description:</label>
           <textarea
             id="pageDescription"
-            value={description}
-            onChange={(e) => setDescription(e.target.value)}
+            value={pageDescription}
+            onChange={(e) => setPageDescription(e.target.value)}
             rows="4"
           />
         </div>
