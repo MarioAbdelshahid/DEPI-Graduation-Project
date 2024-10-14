@@ -19,6 +19,8 @@ export const useLogin = () => {
 
       // save the user to local storage
       localStorage.setItem('user', JSON.stringify(response.data));
+      localStorage.setItem('token', response.data.token); // Store the token
+      localStorage.setItem('userId', response.data.id); // Store the user ID
 
       // update the auth context
       dispatch({ type: 'LOGIN', payload: response.data });

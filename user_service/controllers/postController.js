@@ -22,7 +22,8 @@ exports.createPost = async (req, res) => {
 
     // Save post
     await post.save();
-    res.status(201).json({ message: 'Post created successfully', post,id: post._id });
+    res.status(201).json({ message: 'Post created successfully', post, id: post._id });
+
   } catch (error) {
     res.status(500).json({ error: 'Failed to create post' });
   }

@@ -3,9 +3,9 @@ import { useAuthContext } from './hooks/useAuthContext';
 import './App.css';
 import Login from './pages/Login';
 import Home from './pages/Home';
-import Header from './components/Header/Header';
+ import Header from './components/Header/Header';
 import Dashboard from './pages/Dashboard';
-import Rightbar from './rightbar/Rightbar';
+// import Rightbar from './rightbar/Rightbar';
 
 function App() {
   const { user } = useAuthContext();
@@ -14,7 +14,7 @@ function App() {
     <BrowserRouter>
       <Header />
       <div className="appContainer"> 
-        <Rightbar profile={false} /> 
+        {/* <Rightbar profile={false} />  */}
         <Routes>
           <Route 
             path="/" 

@@ -1,249 +1,78 @@
-/* CSS variables for light and dark modes */
-:root {
-  --bg-color: white;
-  --text-color: black;
-  --header-bg-color: #0b2245;
-  --header-text-color: white;
-  --search-bg-color: #f1f1f1;
-  --search-text-color: black;
-  --sidebar-bg-color: white;
-  --sidebar-text-color: black;
-}
-
-/* Dark mode */
-[data-theme='dark'] {
-  --bg-color: #181818;
-  --text-color: #e1e1e1;
-  --header-bg-color: #333;
-  --header-text-color: #fff;
-  --search-bg-color: #444;
-  --search-text-color: white;
-  --sidebar-bg-color: #2c2c2c;
-  --sidebar-text-color: #e1e1e1;
-}
-
-/* General styling for the entire page */
+/* General Styles */
 body {
-  background-color: var(--bg-color);
-  color: var(--text-color);
   margin: 0;
   font-family: 'Arial', sans-serif;
 }
 
-/* Header styling */
 .header-container {
-  width: 100%;
-  height: 60px;
-  background-color: var(--header-bg-color);
-  color: var(--header-text-color);
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  position: sticky;
-  top: 0;
-  z-index: 999;
-  padding: 0 20px;
+  background-color: #11223d; /* Dark background */
+  color: white;
+  padding: 15px 20px; /* Padding for the header */
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1); /* Subtle shadow */
 }
 
 .header-inner-container {
-  width: 100%;
-  max-width: 1200px;
-  margin: auto;
   display: flex;
-  align-items: center;
-  justify-content: space-between;
+  justify-content: space-between; /* Space between logo and nav */
+  align-items: center; /* Center items vertically */
+  max-width: 1200px; /* Max width for the header */
+  margin: 0 auto; /* Center the container */
+  width: 100%; /* Make sure it takes the full width */
 }
 
-.header-left .logo {
+.header-logo {
   font-size: 24px;
   font-weight: bold;
-  color: #00aaff;
-  text-decoration: none;
+  color: #1A82A7; /* Logo color */
+  cursor: pointer; /* Pointer cursor on hover */
 }
 
-/* Search bar styling */
-.header-center {
+/* Navigation styles */
+.header-nav {
   display: flex;
-  align-items: center;
-  justify-content: center;
-  flex: 1;
+  align-items: center; /* Center items vertically */
 }
 
-.searchbar {
+/* User info */
+.user-info {
   display: flex;
-  align-items: center;
-  background-color: var(--search-bg-color);
-  border-radius: 20px;
-  padding: 0 10px;
+  align-items: center; /* Center items vertically */
 }
 
-.searchInput {
-  padding: 10px;
-  width: 300px;
+.user-email {
+  margin-right: 20px; /* Spacing between email and logout button */
+}
+
+.logout-button {
+  background-color: #FF4C4C; /* Red background for logout */
+  color: white;
   border: none;
-  background-color: var(--search-bg-color);
-  color: var(--search-text-color);
-  outline: none;
-  border-radius: 20px;
+  border-radius: 5px; /* Rounded corners */
+  padding: 10px 15px; /* Padding for the button */
+  cursor: pointer; /* Pointer cursor on hover */
+  transition: background-color 0.3s ease; /* Smooth transition */
 }
 
-/* Right section styling */
-.header-right {
+.logout-button:hover {
+  background-color: #ff1a1a; /* Darker red on hover */
+}
+
+/* Auth links styles */
+.auth-links {
   display: flex;
-  align-items: center;
+  align-items: center; /* Center items vertically */
+  margin-right: -200px;
 }
 
-/* Topbar icons styling */
-.topbarIcons {
-  display: flex;
-  align-items: center;
-  margin-right: 20px;
-}
-
-.topbarIconItem {
-  position: relative;
-  margin-right: 15px;
+.login-link,
+.signup-link {
   color: white;
-  cursor: pointer;
+  text-decoration: none; /* Remove underline */
+  margin: 0 10px; /* Spacing between links */
+  transition: color 0.3s ease; /* Smooth color transition */
 }
 
-.topbarIconBadge {
-  width: 15px;
-  height: 15px;
-  position: absolute;
-  top: -5px;
-  right: 0;
-  background-color: red;
-  color: white;
-  border-radius: 50%;
-  font-size: 10px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-
-/* User profile with dropdown */
-.user-profile {
-  position: relative;
-  cursor: pointer;
-}
-
-.topbarImg {
-  width: 40px;
-  height: 40px;
-  border-radius: 50%;
-  object-fit: cover;
-}
-
-/* Dark mode toggle button */
-.dark-mode-toggle {
-  background-color: transparent;
-  border: none;
-  color: white;
-  cursor: pointer;
-  margin-right: 20px;
-}
-
-/* Dropdown menu styling */
-.dropdown-menu {
-  position: absolute;
-  top: 50px;
-  right: 0;
-  background-color: var(--bg-color);
-  border-radius: 8px;
-  box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
-  padding: 10px;
-  width: 200px;
-  z-index: 9999;
-}
-
-.dropdown-item {
-  display: flex;
-  align-items: center;
-  padding: 10px;
-  color: var(--text-color);
-  text-decoration: none;
-  font-size: 14px;
-}
-
-.dropdown-item:hover {
-  background-color: #f1f1f1;
-}
-
-.logout {
-  color: #ff4d4d;
-}
-
-.logout:hover {
-  background-color: #ffe5e5;
-}
-
-/* Sidebar styling */
-.sidebar {
-  flex: 3;
-  height: calc(100vh - 60px);
-  overflow-y: auto;
-  background-color: var(--sidebar-bg-color);
-  color: var(--sidebar-text-color);
-  position: sticky;
-  top: 60px;
-}
-
-.sidebarWrapper {
-  padding: 20px;
-}
-
-.sidebarList {
-  padding: 0;
-  margin: 0;
-  list-style: none;
-}
-
-.sidebarListItem {
-  display: flex;
-  align-items: center;
-  margin-bottom: 20px;
-}
-
-.sidebarIcon {
-  margin-right: 15px;
-  color: var(--sidebar-text-color);
-}
-
-.sidebarButton {
-  width: 150px;
-  border: none;
-  padding: 10px;
-  border-radius: 5px;
-  font-weight: 500;
-  background-color: #00aaff;
-  color: white;
-  cursor: pointer;
-}
-
-.sidebarButton:hover {
-  background-color: #008ecc;
-}
-
-.sidebarHr {
-  margin: 20px 0;
-}
-
-.sidebarFriendList {
-  padding: 0;
-  margin: 0;
-  list-style: none;
-}
-
-/* Scrollbar styling */
-::-webkit-scrollbar {
-  width: 5px;
-}
-
-::-webkit-scrollbar-track {
-  background-color: #f1f1f1;
-}
-
-::-webkit-scrollbar-thumb {
-  background-color: rgb(179, 179, 179);
+.login-link:hover,
+.signup-link:hover {
+  color: #1A82A7; /* Change color on hover */
 }
