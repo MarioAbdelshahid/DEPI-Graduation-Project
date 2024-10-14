@@ -1,10 +1,17 @@
 import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom';
 import { useAuthContext } from './hooks/useAuthContext';
-import './App.css';
+
+import Header from './components/Header/Header';
+import CreatePost from './components/CreatePost/CreatePost';
+import CreatePage from './components/CreatePage/CreatePage';
+
 import Login from './pages/Login';
 import Home from './pages/Home';
- import Header from './components/Header/Header';
 import Dashboard from './pages/Dashboard';
+
+import './App.css';
+
+
 // import Rightbar from './rightbar/Rightbar';
 
 function App() {
@@ -27,6 +34,14 @@ function App() {
           <Route 
             path="/dashboard" 
             element={user ? <Dashboard /> : <Navigate to="/login" />} 
+          />
+          <Route 
+            path="/create-page" 
+            element={user ? <CreatePage /> : <Navigate to="/login" />} 
+          />
+          <Route 
+            path="/create-post" 
+            element={user ? <CreatePost /> : <Navigate to="/login" />} 
           />
         </Routes>
       </div>

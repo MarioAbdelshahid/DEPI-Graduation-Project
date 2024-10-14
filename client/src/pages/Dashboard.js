@@ -1,12 +1,22 @@
-import React from 'react';
+import React, { useState } from 'react';
+import Posts from '../components/Posts/Posts'; 
+import './styles/Home.css';
 
 const Dashboard = () => {
-    return (
-        <div>
-            <h1>Dashboard</h1>
-            <p>Welcome to the Dashboard!</p>
-        </div>
-    );
+  const [refreshPosts, setRefreshPosts] = useState(false); 
+
+  const refreshAllPosts = () => {
+    setRefreshPosts(prev => !prev);
+  };
+  
+  return (
+    <div className="dashboard-container">
+      
+      <button onClick={refreshAllPosts}>Refresh Posts</button>
+      
+      <Posts refresh={refreshPosts} />
+    </div>
+  );
 };
 
 export default Dashboard;

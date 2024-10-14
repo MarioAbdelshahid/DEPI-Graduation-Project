@@ -85,6 +85,15 @@ exports.postLike = async (req, res) => {
   }
 };
 
+exports.getPosts = async (req, res) => {
+    try {
+      const posts = await Post.find().populate('postedBy'); // Populate user data if needed
+      res.status(200).json(posts); // Returning all posts
+    } catch (error) {
+      res.status(500).json({ message: 'Failed to fetch posts' });
+    }
+};
+
 exports.getPostsByPage = async (req, res) => {
   try {
       const posts = await Post.find({ page: req.params.pageID }); // Adjust as necessary
@@ -95,7 +104,7 @@ exports.getPostsByPage = async (req, res) => {
   }
 };
 
-exports.getAllPostsByUser = async (req, res) => {
+exports.getPostsByUser = async (req, res) => {
   const { userID } = req.params;
 
   try {

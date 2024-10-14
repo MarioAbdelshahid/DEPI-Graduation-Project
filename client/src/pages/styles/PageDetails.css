@@ -1,0 +1,57 @@
+.page-details-container {
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+  }
+  
+  .page-layout {
+    display: flex;
+  }
+  
+  .page-header {
+    display: flex;
+    align-items: center;
+  }
+  
+  .page-logo {
+    width: 60px; /* Adjust as needed */
+    height: 60px; /* Adjust as needed */
+    border-radius: 50%;
+    margin-right: 15px;
+  }
+  
+  .page-body {
+    display: flex;
+    width: 100%;
+    margin-top: 20px;
+  }
+  
+  .posts-container {
+    flex: 2; /* Take 2/3 of the width */
+    margin-right: 20px; /* Space between posts and info */
+  }
+  
+  .page-info {
+    flex: 1; /* Take 1/3 of the width */
+    background-color: #f9f9f9;
+    padding: 15px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+  }
+  
+  h1, h2, h3 {
+    margin: 10px 0;
+  }
+  
+  .post-item {
+    margin-bottom: 15px;
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    background-color: #fff;
+  }
+  
+  .error {
+    color: red;
+  }
+  

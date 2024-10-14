@@ -1,7 +1,7 @@
 const express = require('express');
 
 // controller functions
-const { createPost, deletePost, postLike, getPostsByPage,getAllPostsByUser } = require('../controllers/postController');
+const { createPost, deletePost, postLike, getPosts, getPostsByPage,getPostsByUser } = require('../controllers/postController');
 
 // Autherization and Routes
 const authMiddleware = require('../middleware/requireAuth.js');
@@ -16,8 +16,10 @@ router.delete('/deletePost/:postID', authMiddleware, deletePost);
 // Like/Unlike a post
 router.post('/likePost/:postID/like', authMiddleware, postLike); 
 
-router.get('/getPosts/:pageID/posts', authMiddleware, getPostsByPage);
+router.get('/getPosts', authMiddleware, getPosts);
 
-router.get('/getPostsByUser/:userID/posts', authMiddleware, getAllPostsByUser);
+router.get('/getPostsByPage/:pageID/posts', authMiddleware, getPostsByPage);
+
+router.get('/getPostsByUser/:userID/posts', authMiddleware, getPostsByUser);
 
 module.exports = router;

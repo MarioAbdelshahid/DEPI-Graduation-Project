@@ -8,6 +8,7 @@ const Home = () => {
   const [postContent, setPostContent] = useState('');
   const [error, setError] = useState('');
   const [refreshPosts, setRefreshPosts] = useState(false); // Trigger for refetching posts
+  const userID = localStorage.getItem('userId');
 
   const createPost = async (e) => {
     e.preventDefault(); // Prevent default form submission
@@ -55,7 +56,7 @@ const Home = () => {
         <button type="submit">Add Post</button>
         {error && <div className="error">{error}</div>}
       </form>
-      <Posts refresh={refreshPosts} /> {/* Pass refresh state to Posts */}
+      <Posts refresh={refreshPosts} userSpecific = {userID} /> 
     </div>
   );
 };

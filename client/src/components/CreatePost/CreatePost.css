@@ -1,0 +1,36 @@
+
+.create-post-container {
+    padding: 20px;
+    background-color: #282828;
+    border-radius: 5px;
+    color: #fff;
+  }
+  
+  .create-post-container input,
+  .create-post-container textarea {
+    width: 100%;
+    margin-bottom: 10px;
+    padding: 10px;
+    border-radius: 5px;
+    border: none;
+  }
+  
+  .create-post-container button {
+    padding: 10px 15px;
+    margin-right: 10px;
+    cursor: pointer;
+    background-color: #0079d3;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+  }
+  
+  .create-post-container button.active {
+    background-color: #ff4500;
+  }
+  
+  .create-post-container .error {
+    color: red;
+    margin-top: 10px;
+  }
+  
