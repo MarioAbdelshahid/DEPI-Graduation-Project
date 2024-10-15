@@ -1,7 +1,7 @@
 const express = require('express')
 
 // controller functions
-const { createComment, deleteComment, commentLike } = require('../controllers/commentController');
+const { createComment, deleteComment, commentLike,getCommentsByPost } = require('../controllers/commentController');
 
 // Autherization and Routes
 const authMiddleware = require('../middleware/requireAuth.js');
@@ -15,5 +15,7 @@ router.delete('/deleteCommments/:commentID', authMiddleware, deleteComment);
 
 // Like/Unlike a comment
 router.post('/likeComments/:commentID/like', authMiddleware, commentLike); 
+// Fetch comments by post ID
+router.get('/comments/:postID', authMiddleware, getCommentsByPost);
 
 module.exports = router

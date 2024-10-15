@@ -1,149 +1,179 @@
+/* Header.css */
 
+/* Main header container */
 .header-container {
-  background-color: #ffffff; /* Background color for the header */
-  border-bottom: 1px solid #ccc; /* Bottom border */
-  padding: 10px 20px; /* Padding for the header */
+  background-color: #fff;
+  border-bottom: 1px solid #e0e0e0;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  position: sticky;
+  top: 0;
+  width: 100%;
+  z-index: 100;
 }
 
+/* Inner header content */
 .header-inner-container {
   display: flex;
-  align-items: center; /* Center items vertically */
-  justify-content: space-between; /* Space between elements */
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 20px;
+  max-width: 1200px;
+  margin: auto;
 }
 
-.header-logo {
-  font-size: 24px; /* Logo font size */
-  font-weight: bold; /* Bold logo */
-  color: #333; /* Logo color */
-  cursor: pointer; /* Change cursor to pointer on hover */
-}
-
+/* Header navigation styling */
 .header-nav {
   display: flex;
-  align-items: center; /* Center items vertically */
+  align-items: center;
+  gap: 20px;
 }
 
-.search-container {
-  margin: 0 20px; /* Margin around the search bar */
-  flex-grow: 1; /* Allow search bar to grow and fill space */
+/* Header logo */
+.header-logo {
+  font-size: 24px;
+  font-weight: bold;
+  color: #007bff;
+  cursor: pointer;
 }
 
-.search-input {
-  width: 100%; /* Full width of the container */
-  padding: 8px; /* Padding for the search input */
-  border: 1px solid #ccc; /* Border around the input */
-  border-radius: 4px; /* Rounded corners */
+/* User information and profile dropdown */
+.user-info {
+  display: flex;
+  align-items: center;
+  gap: 10px;
 }
 
+/* Create dropdown */
 .create-dropdown {
-  position: relative; /* Position relative for dropdown positioning */
-  margin-right: 20px; /* Margin for spacing */
+  position: relative;
 }
 
 .create-button {
-  padding: 8px 12px; /* Button padding */
-  border: none; /* Remove default border */
-  background-color: #007bff; /* Button background color */
-  color: white; /* Button text color */
-  border-radius: 4px; /* Rounded corners */
-  cursor: pointer; /* Change cursor to pointer on hover */
+  background-color: #007bff;
+  color: #fff;
+  border: none;
+  padding: 8px 16px;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 14px;
 }
 
 .create-button:hover {
-  background-color: #0056b3; /* Darker shade on hover */
+  background-color: #0056b3;
 }
 
+/* Dropdown menu */
 .dropdown-menu {
-  position: absolute; /* Absolute positioning for dropdown */
-  top: 100%; /* Position below the button */
-  left: 0; /* Align left */
-  background: white; /* Background color */
-  border: 1px solid #ccc; /* Border for dropdown */
-  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1); /* Shadow for dropdown */
-  z-index: 1000; /* Ensure dropdown appears above other elements */
-  min-width: 160px; /* Minimum width */
+  position: absolute;
+  top: 100%; /* Adjust to fit your design */
+  left: 0;
+  z-index: 1000;
+  background-color: white; /* Or any color you prefer */
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  width: 200px; /* Set a width to keep it within bounds */
 }
 
 .dropdown-item {
-  display: block; /* Each item takes full width */
-  padding: 10px 15px; /* Padding for dropdown items */
-  text-decoration: none; /* Remove underline */
-  color: #333; /* Text color */
+  padding: 10px 15px;
+  cursor: pointer;
 }
 
 .dropdown-item:hover {
-  background: #f0f0f0; /* Highlight on hover */
+  background-color: #f0f0f0; /* Add hover effect */
 }
 
+/* Profile dropdown */
 .profile-dropdown {
-  position: relative; /* Position relative for dropdown positioning */
-  margin-right: 20px; /* Margin for spacing */
+  position: relative;
 }
 
 .profile-button {
-  padding: 8px 12px; /* Button padding */
-  border: none; /* Remove default border */
-  background-color: transparent; /* Transparent background */
-  color: #333; /* Text color */
-  cursor: pointer; /* Change cursor to pointer on hover */
-}
-
-.user-info {
-  display: flex; /* Flexbox layout for user info */
-  align-items: center; /* Center items vertically */
-}
-
-.user-email {
-  margin-right: 20px; /* Space between email and logout button */
-  font-weight: 500; /* Bold email */
-}
-
-.logout-button {
-  background-color: transparent; /* Transparent background */
-  border: none; /* Remove default border */
-  color: #d9534f; /* Logout button color */
-  cursor: pointer; /* Change cursor to pointer on hover */
-}
-
-.dark-mode-toggle {
-  margin-left: 20px; /* Margin for spacing */
-  background: none; /* No background */
+  background-color: #007bff; /* Matching background with create button */
+  color: #fff; /* White text color */
   border: none; /* No border */
-  color: #007bff; /* Dark mode button color */
-  cursor: pointer; /* Change cursor to pointer */
+  padding: 8px 16px; /* Padding for the button */
+  border-radius: 4px; /* Rounded corners */
+  cursor: pointer; /* Pointer cursor on hover */
+  font-size: 14px; /* Font size */
+  width: 100%; /* Make button full width */
+  max-width: 200px; /* Set a max width to keep it manageable */
+}
+.view-profile-button {
+  background-color: #0056b3;
+  color: #fff;
+  padding: 8px 16px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 14px;
 }
 
+/* Hover effects */
+.profile-button:hover,
+
+/* Dark mode toggle */
+.dark-mode-toggle {
+  background: #333;
+  color: #fff;
+  padding: 8px 16px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.dark-mode-toggle:hover {
+  background: #555;
+}
+
+/* Logout button */
+.logout-button {
+  background-color: #ff4d4d;
+  color: #fff;
+  padding: 8px 16px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 14px;
+}
+
+.logout-button:hover {
+  background-color: #cc0000;
+}
+
+/* Authentication links styling */
 .auth-links {
-  display: flex; /* Flex layout for auth links */
+  display: flex;
+  gap: 10px;
 }
 
-.login-link, .signup-link {
-  margin-left: 10px; /* Space between links */
-  text-decoration: none; /* Remove underline */
-  color: #007bff; /* Link color */
+.login-link a,
+.signup-link {
+  color: #007bff;
+  font-weight: 500;
+  text-decoration: none;
 }
 
-.login-link:hover, .signup-link:hover {
-  text-decoration: underline; /* Underline on hover */
+.login-link a:hover,
+.signup-link:hover {
+  text-decoration: underline;
 }
 
-/* Responsive styles */
+/* Responsive behavior */
 @media (max-width: 768px) {
   .header-inner-container {
-    flex-direction: column; /* Stack elements vertically */
-    align-items: flex-start; /* Align items to the start */
-  }
-
-  .search-container {
-    margin: 10px 0; /* Margin for search on mobile */
-    width: 100%; /* Full width on mobile */
+    flex-direction: column;
+    align-items: flex-start;
   }
 
   .header-nav {
-    flex-wrap: wrap; /* Allow wrapping */
+    flex-direction: column;
+    gap: 10px;
   }
 
-  .user-info {
-    margin-top: 10px; /* Space between user info and other elements */
+  .dropdown-menu {
+    right: auto;
+    left: 0;
   }
 }

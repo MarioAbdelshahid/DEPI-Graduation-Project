@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
-import CreatePost from './CreatePost';
-import './styles/pageDetails.css';
+import CreatePost from '../components/CreatePost/CreatePost';
+import './styles/PageDetails.css';
 
 const PageDetails = ({ pageId }) => {
   const [pageDetails, setPageDetails] = useState(null);

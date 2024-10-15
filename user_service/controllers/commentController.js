@@ -90,3 +90,14 @@ exports.commentLike = async (req, res) => {
   }
 };
 
+exports.getCommentsByPost = async (req, res) => {
+  try {
+    const { postID } = req.params;
+    const comments = await Comment.find({ post: postID }).populate('createdBy', 'name'); // Populate user data
+
+    res.status(200).json(comments);
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ message: 'Failed to fetch comments' });
+  }
+};

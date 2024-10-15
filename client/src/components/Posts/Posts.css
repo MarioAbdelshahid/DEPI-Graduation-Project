@@ -37,3 +37,21 @@
     font-size: 1.2rem; /* Larger font size for the message */
     color: #777; /* Gray color for the message */
 }
+/* Posts.css */
+
+/* Add styles for the comments section */
+.comments-container {
+    margin-top: 20px;
+  }
+  
+  .comment {
+    border: 1px solid #ccc;
+    padding: 10px;
+    margin: 10px 0;
+    border-radius: 4px;
+  }
+  
+  .comment p {
+    margin: 5px 0;
+  }
+  

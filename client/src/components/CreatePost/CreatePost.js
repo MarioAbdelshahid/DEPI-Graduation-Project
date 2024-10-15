@@ -1,114 +1,74 @@
 import React, { useState } from 'react';
 import axios from 'axios';
 import './CreatePost.css';
+import { Co2Sharp } from '@mui/icons-material';
 
-const CreatePost = ({ refreshPosts }) => {
+const CreatePost = ({ onPostCreated, onClose }) => {
   const [postTitle, setPostTitle] = useState('');
-  const [file, setFile] = useState(null); // For file upload (image or video)
-  const [contentType, setContentType] = useState('text'); // Track content type (text, image, video)
-  const [textContent, setTextContent] = useState(''); // For text content
+  const [postContent, setPostContent] = useState('');
   const [error, setError] = useState('');
+  const token = localStorage.getItem('token');
 
-  // File input change handler
-  const handleFileChange = (e) => {
-    setFile(e.target.files[0]);
-  };
-
-  // Form submission
-  const handleSubmit = async (e) => {
+  const createPost = async (e) => {
     e.preventDefault();
+    setError('');
 
-    const token = localStorage.getItem('token');
-    if (!token) {
-      setError('User not authenticated');
-      return;
-    }
-
-    const formData = new FormData(); // To handle file upload
-    formData.append('header', postTitle);
-    formData.append('contentType', contentType);
-    
-    if (contentType === 'text') {
-      formData.append('text', textContent);
-    } else {
-      formData.append('file', file); // Attach the file for image or video
-    }
+    const newPost = {
+      header: postTitle,
+      content: { text: postContent },
+    };
 
     try {
-      const response = await axios.post('http://localhost:4000/api/post/createPost', formData, {
+      // Capture the response from the API
+      const response = await axios.post('http://localhost:4000/api/post/createPost', newPost, {
         headers: {
           Authorization: `Bearer ${token}`,
-          'Content-Type': 'multipart/form-data',
         },
       });
+      
+      // Assuming the postId is returned in the response
+      const postId = response.data.id; // Adjust according to your actual response structure
+      console.log('created',postId);
+  
+      
+      // Save postId to local storage
+      localStorage.setItem('createdPostId', postId);
 
-      // Clear inputs after submission
+      // Clear the input fields
       setPostTitle('');
-      setFile(null);
-      setTextContent('');
-      refreshPosts(); // Refresh post list
+      setPostContent('');
+
+      // Call the onPostCreated callback if provided
+      if (onPostCreated) onPostCreated();
     } catch (err) {
-      setError('Failed to create post');
+      setError('Failed to create post. Please try again.');
     }
   };
 
   return (
-    <div className="create-post-container">
-      <h2>Create a Post</h2>
-      <form onSubmit={handleSubmit}>
-        <input
-          type="text"
-          placeholder="Post Title"
-          value={postTitle}
-          onChange={(e) => setPostTitle(e.target.value)}
-          required
-        />
-
-        <div className="content-type-selector">
-          <button
-            type="button"
-            className={contentType === 'text' ? 'active' : ''}
-            onClick={() => setContentType('text')}
-          >
-            Text
-          </button>
-          <button
-            type="button"
-            className={contentType === 'image' ? 'active' : ''}
-            onClick={() => setContentType('image')}
-          >
-            Image
-          </button>
-          <button
-            type="button"
-            className={contentType === 'video' ? 'active' : ''}
-            onClick={() => setContentType('video')}
-          >
-            Video
-          </button>
-        </div>
-
-        {contentType === 'text' && (
-          <textarea
-            placeholder="Enter text content"
-            value={textContent}
-            onChange={(e) => setTextContent(e.target.value)}
-            required
-          />
-        )}
-
-        {(contentType === 'image' || contentType === 'video') && (
-          <input
-            type="file"
-            accept={contentType === 'image' ? 'image/*' : 'video/*'}
-            onChange={handleFileChange}
-            required
-          />
-        )}
-
-        <button type="submit">Create Post</button>
+    <div className="modal-overlay">
+      <div className="modal-container">
+        <button className="close-button" onClick={onClose}>X</button>
+        <h2>Create New Post</h2>
         {error && <p className="error">{error}</p>}
-      </form>
+        <form onSubmit={createPost}>
+          <input
+            type="text"
+            placeholder="Post Title"
+            value={postTitle}
+            onChange={(e) => setPostTitle(e.target.value)}
+            required
+          />
+          <textarea
+            placeholder="Post Content"
+            value={postContent}
+            onChange={(e) => setPostContent(e.target.value)}
+            rows="4"
+            required
+          />
+          <button type="submit">Create Post</button>
+        </form>
+      </div>
     </div>
   );
 };

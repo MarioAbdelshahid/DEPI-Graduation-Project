@@ -1,10 +1,10 @@
 
 
 import "./profile.css";
-import Header from "../../components/Header/Header"; 
+import Header from "../Header/Header"; 
 
 
-import Rightbar from "../../components/rightbar/Rightbar";
+import Rightbar from "../rightbar/Rightbar";
 
 export default function Profile() {
   return (

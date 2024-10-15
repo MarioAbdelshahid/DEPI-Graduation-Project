@@ -1,17 +1,17 @@
+// components/CreatePage/CreatePage.js
 import React, { useState } from 'react';
 import axios from 'axios';
 import './CreatePage.css';
 
-const CreatePage = ({ onPageCreated }) => {
-  const [pageName, setPageName] = useState(''); // Handle page name input
-  const [pageDescription, setPageDescription] = useState(''); // Handle description input
-  const [error, setError] = useState(''); // Error handling
-  const token = localStorage.getItem('token'); // Retrieve the token for authorization
+const CreatePage = ({ onPageCreated, onClose }) => {
+  const [pageName, setPageName] = useState('');
+  const [pageDescription, setPageDescription] = useState('');
+  const [error, setError] = useState('');
+  const token = localStorage.getItem('token');
 
-  // Handle form submission
   const createPage = async (e) => {
-    e.preventDefault(); // Prevent page reload on form submission
-    setError(''); // Clear previous error messages
+    e.preventDefault();
+    setError('');
 
     const newPage = {
       name: pageName,
@@ -24,46 +24,37 @@ const CreatePage = ({ onPageCreated }) => {
           Authorization: `Bearer ${token}`,
         },
       });
-
-      // Clear form fields after successful creation
       setPageName('');
       setPageDescription('');
-
-      // Call the callback function to notify parent component
-      if (onPageCreated) {
-        onPageCreated(); // You can pass additional info like the new page data if needed
-      }
+      if (onPageCreated) onPageCreated();
     } catch (err) {
       setError('Failed to create page. Please try again.');
     }
   };
 
   return (
-    <div className="create-page-container">
-      <h2>Create New Page</h2>
-      {error && <p className="error">{error}</p>}
-      <form onSubmit={createPage}>
-        <div>
-          <label htmlFor="pageName">Page Name:</label>
+    <div className="modal-overlay">
+      <div className="modal-container">
+        <button className="close-button" onClick={onClose}>X</button>
+        <h2>Create New Page</h2>
+        {error && <p className="error">{error}</p>}
+        <form onSubmit={createPage}>
           <input
             type="text"
-            id="pageName"
+            placeholder="Page Name"
             value={pageName}
             onChange={(e) => setPageName(e.target.value)}
             required
           />
-        </div>
-        <div>
-          <label htmlFor="pageDescription">Description:</label>
           <textarea
-            id="pageDescription"
+            placeholder="Page Description"
             value={pageDescription}
             onChange={(e) => setPageDescription(e.target.value)}
             rows="4"
           />
-        </div>
-        <button type="submit">Create Page</button>
-      </form>
+          <button type="submit">Create Page</button>
+        </form>
+      </div>
     </div>
   );
 };
