@@ -1,7 +1,7 @@
 const express = require('express')
 
 // controller functions
-const { createPage, deletePage } = require('../controllers/pageController')
+const { createPage, deletePage, getPages } = require('../controllers/pageController')
 
 // Autherization and Routes
 const authMiddleware = require('../middleware/requireAuth.js');
@@ -14,5 +14,7 @@ router.post('/createPages', authMiddleware, createPage)
 router.delete('/deletePage/:pageID', authMiddleware, deletePage)
 
 // router.get('/searchPage', authMiddleware, searchPage)
+
+router.get('/getPages', authMiddleware, getPages)
 
 module.exports = router

@@ -7,10 +7,12 @@ import { ThemeContext, ThemeProvider } from './context/ThemeContext';
 import Header from './components/Header/Header';
 import CreatePost from './components/CreatePost/CreatePost';
 import CreatePage from './components/CreatePage/CreatePage';
+
 import PageDetails from './pages/PageDetails';
 import Login from './pages/Login';
 import Home from './pages/Home';
 import Dashboard from './pages/Dashboard';
+import Discover from './pages/Discover';
 
 import './App.css';
 
@@ -55,6 +57,10 @@ function App() {
           <Route 
             path="/dashboard" 
             element={user ? <Dashboard /> : <Navigate to="/login" />} 
+          />
+          <Route 
+            path="/discover" 
+            element={user ? <Discover /> : <Navigate to="/login" />}
           />
           <Route 
             path="/pages/:pageId" 

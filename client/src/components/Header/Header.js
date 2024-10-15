@@ -171,6 +171,7 @@ import { useAuthContext } from '../../hooks/useAuthContext';
 import { useState, useEffect, useRef } from 'react';
 import './Header.css';
 import { useNavigate } from 'react-router-dom';
+
 const Header = ({ openCreatePostPopup, openCreatePagePopup }) => {
   const { logout } = useLogout();
   const { user } = useAuthContext();
@@ -229,6 +230,10 @@ const Header = ({ openCreatePostPopup, openCreatePagePopup }) => {
               <div className='user-info'>
                 <Link to="/dashboard">
                   <div className='header-logo'>InstaSUI</div>
+                </Link>
+
+                <Link to="/discover">
+                  <button>Discover</button>
                 </Link>
 
                 <div className="create-dropdown" ref={createDropdownRef}>

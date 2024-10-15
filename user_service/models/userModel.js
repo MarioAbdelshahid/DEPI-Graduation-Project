@@ -5,7 +5,7 @@ const validator = require('validator')
 const Schema = mongoose.Schema
 
 const userSchema = new Schema({
-  name:{
+  name: {
     type: String,
     required: true
   },
@@ -21,8 +21,15 @@ const userSchema = new Schema({
   isAdmin: {
     type: Boolean,
     default: false, 
+  },
+  profilePicture: { 
+    type: String,
+    required: false 
   }
-})
+});
+
+
+
 
 // static signup method
 userSchema.statics.signup = async function(name, email, password) {

@@ -4,16 +4,16 @@ const User = require('../models/userModel')
 const Post = require('../models/postModel')
 
 
+// In your page controller
 exports.createPage = async (req, res) => {
   try {
     const { name, description } = req.body;
 
-    // Create new page
     const page = new Page({
       name,
       description,
       createdBy: req.user.id,
-    })
+    });
 
     // Save page
     await page.save();
@@ -28,6 +28,7 @@ exports.createPage = async (req, res) => {
     res.status(500).json({ error: 'Failed to create page' });
   }
 };
+
 
 exports.deletePage = async (req, res) => {
   try {
@@ -81,3 +82,15 @@ exports.deletePage = async (req, res) => {
 //     res.status(500).json({ message: 'Failed to fetch pages' });
 //   }
 // };
+
+
+// In your page controller
+exports.getPages = async (req, res) => {
+  try {
+    const pages = await Page.find().populate('createdBy', 'name'); // Populate the createdBy field with the user's name
+    return res.status(200).json(pages);
+  } catch (error) {
+    return res.status(500).json({ error: 'Failed to load pages' });
+  }
+};
+
