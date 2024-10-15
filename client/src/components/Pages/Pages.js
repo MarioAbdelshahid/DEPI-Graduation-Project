@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import Avatar from '../Avatar/Avatar';
+import { Link } from 'react-router-dom'; // Import Link
 import './Pages.css';
 
 const Pages = ({ refresh }) => {
@@ -43,7 +44,7 @@ const Pages = ({ refresh }) => {
     <div className="pages-container">
       {pages.length > 0 ? (
         pages.map((page) => (
-          <div className="page-item" key={page._id}>
+          <Link to={`/pages/${page._id}`} className="page-item" key={page._id}>
             <Avatar src={page.pageImage || 'https://cdn-icons-png.flaticon.com/512/1804/1804066.png'} n={48} />
             <div className="page-details">
               <h3 className="page-name">{page.name}</h3>
@@ -53,7 +54,7 @@ const Pages = ({ refresh }) => {
               </p>
               <p className="page-description">{page.description}</p>
             </div>
-          </div>
+          </Link>
         ))
       ) : (
         <p className="no-pages">No pages found</p>

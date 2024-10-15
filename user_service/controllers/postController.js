@@ -7,7 +7,7 @@ const Comment = require('../models/commentModel')
 // Create a new post
 exports.createPost = async (req, res) => {
   try {
-    const { header, content } = req.body;
+    const { header, content, pageId } = req.body;
 
     const post = new Post({
       header,
@@ -17,8 +17,9 @@ exports.createPost = async (req, res) => {
         video: content.video
       } : null,
       postedBy: req.user.id,
-      page: req.body.pageId ? req.body.pageId : null
+      page: pageId ? pageId : null 
     });
+
 
     // Save post
     await post.save();
@@ -86,32 +87,39 @@ exports.postLike = async (req, res) => {
 };
 
 exports.getPosts = async (req, res) => {
-    try {
-      const posts = await Post.find().populate('postedBy'); // Populate user data if needed
-      res.status(200).json(posts); // Returning all posts
-    } catch (error) {
-      res.status(500).json({ message: 'Failed to fetch posts' });
-    }
+  try {
+    const posts = await Post.find().populate('postedBy', 'name profilePicture'); // Populate user data (name and profile picture)
+    res.status(200).json(posts);
+  } catch (error) {
+    res.status(500).json({ message: 'Failed to fetch posts' });
+  }
 };
+
+
+
 
 exports.getPostsByPage = async (req, res) => {
   try {
-      const posts = await Post.find({ page: req.params.pageID }); // Adjust as necessary
-      res.status(200).json(posts);
+    const posts = await Post.find({ page: req.params.pageID }).populate('postedBy', 'name profilePicture'); // Populate user data (name and profile picture)
+    res.status(200).json(posts);
   } catch (error) {
-      console.error(error);
-      res.status(500).json({ error: 'Failed to retrieve posts' });
+    console.error(error);
+    res.status(500).json({ error: 'Failed to retrieve posts' });
   }
 };
+
+
+
 
 exports.getPostsByUser = async (req, res) => {
   const { userID } = req.params;
 
   try {
-    const posts = await Post.find({ postedBy: userID }); // Query to find posts by userID
+    // Populate the 'postedBy' field with the 'name' and 'profilePicture' of the user
+    const posts = await Post.find({ postedBy: userID }).populate('postedBy', 'name profilePicture');
     res.status(200).json(posts);
   } catch (error) {
+    console.error(error);
     res.status(500).json({ error: 'Failed to retrieve posts' });
   }
 };
-
