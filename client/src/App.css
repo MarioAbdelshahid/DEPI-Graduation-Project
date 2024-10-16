@@ -3,6 +3,7 @@
   margin: 0;
   padding: 0;
   box-sizing: border-box;
+ 
 }
 
 body {
@@ -90,10 +91,10 @@ button:hover {
 }
 
 body.dark button {
-  background-color: #333; /* Dark button background */
+  background-color: #115BCA; /* Dark button background */
   color: #fff; /* White text */
 }
 
 body.dark button:hover {
-  background-color: #555; /* Dark button hover effect */
+  background-color: #2570e0; /* Dark button hover effect */
 }

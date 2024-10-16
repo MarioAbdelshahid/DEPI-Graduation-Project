@@ -1,0 +1,76 @@
+/* Light Mode */
+body.light form {
+    background-color: #fff;
+    /* White background for light mode */
+    border: 1px solid #e0e0e0;
+    /* Light gray border */
+    padding: 20px;
+    /* Padding around the form */
+    border-radius: 8px;
+    /* Rounded corners */
+}
+
+.pppp{
+    color: #333;
+}
+
+body.dark .pppp {
+    color: #fff;
+}
+
+
+
+/* Dark Mode Text Color Update */
+body.dark .pppp {
+    color: white;
+    /* Set the text color to white in dark mode */
+}
+
+body.dark form label,
+body.dark form p {
+    color: white;
+    /* Set the label and paragraph text color to white in dark mode */
+}
+/* Dark Mode */
+body.dark form {
+    background-color:#393d3f;
+    /* Wheat background for dark mode */
+    border: 1px solid #ccc;
+    /* Light gray border for separation */
+    padding: 20px;
+    /* Padding around the form */
+    border-radius: 8px;
+    /* Rounded corners */
+}
+
+/* Additional styles for form elements (inputs, buttons, etc.) */
+body.light form input,
+body.light form button {
+    background-color:#115BCA;
+    /* Light background for inputs/buttons */
+    color: #333;
+    
+    /* Dark text color */
+}
+
+body.dark form input,
+body.dark form button {
+    background-color: #115BCA;
+    /* Slightly darker wheat background for inputs/buttons */
+    color: white;
+    /* Dark text color for contrast */
+}
+
+/* Hover effects for buttons */
+body.light form button:hover,
+body.dark form button:hover {
+    opacity: 0.8;
+    /* Slightly change opacity on hover */
+}
+
+/* Example styles for text elements within the form */
+body.dark form label,
+body.dark form p {
+    color: white;
+    /* Dark text for labels and paragraphs */
+}

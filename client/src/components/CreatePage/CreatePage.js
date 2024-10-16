@@ -35,8 +35,10 @@ const CreatePage = ({ onPageCreated, onClose }) => {
   return (
     <div className="modal-overlay">
       <div className="modal-container">
-        <button className="close-button" onClick={onClose}>X</button>
-        <h2>Create New Page</h2>
+        <button className="close-button" onClick={onClose}>
+          X
+        </button>
+        <h2 style={{ color: "white" }}>Create New Page</h2>
         {error && <p className="error">{error}</p>}
         <form onSubmit={createPage}>
           <input
@@ -45,6 +47,7 @@ const CreatePage = ({ onPageCreated, onClose }) => {
             value={pageName}
             onChange={(e) => setPageName(e.target.value)}
             required
+            style={{ background: "white" }}
           />
           <textarea
             placeholder="Page Description"
@@ -52,7 +55,9 @@ const CreatePage = ({ onPageCreated, onClose }) => {
             onChange={(e) => setPageDescription(e.target.value)}
             rows="4"
           />
-          <button type="submit">Create Page</button>
+          <button style={{ color: "white" }} type="submit">
+            Create Page
+          </button>
         </form>
       </div>
     </div>

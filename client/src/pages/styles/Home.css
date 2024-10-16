@@ -1,7 +1,13 @@
 form {
     margin-bottom: 20px;
   }
+    .home-container{
+      text-align: center;
+    }
+ body.dark .home-container h1{
+    color: white;
   
+  }
   input, textarea {
     display: block;
     margin: 10px 0;

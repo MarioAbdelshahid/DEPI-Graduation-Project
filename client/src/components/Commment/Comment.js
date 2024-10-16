@@ -15,28 +15,35 @@ const Comment = ({ comment, userId, onDelete, onLike }) => {
     <div className="comment">
       <div className="comment-header">
         <div className="comment-user-info">
-          <Avatar 
-            src={comment.createdBy.profilePicture || defaultAvatar} 
+          <Avatar
+            src={comment.createdBy.profilePicture || defaultAvatar}
             n={40} // Adjust the size as needed
           />
-          <span className="comment-user-name">{comment.createdBy.name || 'Unknown User'}</span>
-          <div className="comment-date">{new Date(comment.createdAt).toLocaleDateString()}</div>
+          <span style={{ color: "white" }} className="comment-user-name">
+            {comment.createdBy.name || "Unknown User"}
+          </span>
+          <div className="comment-date">
+            {new Date(comment.createdAt).toLocaleDateString()}
+          </div>
         </div>
       </div>
-      <div className="comment-content">
+      <div style={{ color: "white" }} className="comment-content">
         <p>{comment.content}</p>
       </div>
       <div className="comment-actions">
         <button onClick={() => onLike(comment._id)} className="like-button">
           <FontAwesomeIcon
             icon={isLiked ? solidHeart : regularHeart}
-            style={{ color: isLiked ? 'red' : 'black' }} // Set color based on like status
+            style={{ color: isLiked ? "red" : "black" }} // Set color based on like status
           />
         </button>
-        <span>
-          {comment.likes.length} {comment.likes.length === 1 ? 'Like' : 'Likes'}
+        <span style={{ color: "white" }}>
+          {comment.likes.length} {comment.likes.length === 1 ? "Like" : "Likes"}
         </span>
-        <button onClick={() => onDelete(comment._id)} className="delete-comment-button">
+        <button
+          onClick={() => onDelete(comment._id)}
+          className="delete-comment-button"
+        >
           Delete
         </button>
       </div>

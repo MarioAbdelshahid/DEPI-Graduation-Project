@@ -131,11 +131,21 @@ const Posts = ({ refresh, userSpecific, pageSpecific }) => {
           <div className="post" key={post._id}>
             <div className="post-header-container">
               <div className="post-user-info">
-                <Avatar src={post.postedBy?.profilePicture || 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS3URjWpcZfPfzAHxrU_Xms2GzfUJmvWXGjuw&s'} n={48} />
+                <Avatar
+                  src={
+                    post.postedBy?.profilePicture ||
+                    "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS3URjWpcZfPfzAHxrU_Xms2GzfUJmvWXGjuw&s"
+                  }
+                  n={48}
+                />
                 <div className="post-user-name-date">
-                  <p className="post-user-name">{post.postedBy?.name || 'Unknown User'}</p>
+                  <p className="post-user-name">
+                    {post.postedBy?.name || "Unknown User"}
+                  </p>
                 </div>
-                <div className="post-date">{new Date(post.createdAt).toLocaleDateString()}</div>
+                <div className="post-date">
+                  {new Date(post.createdAt).toLocaleDateString()}
+                </div>
               </div>
             </div>
 
@@ -143,21 +153,46 @@ const Posts = ({ refresh, userSpecific, pageSpecific }) => {
 
             <div className="post-content">
               {post.content?.text && <p>{post.content.text}</p>}
-              {post.content?.image && <img src={post.content.image} alt="Post content" />}
-              {post.content?.video && <video controls src={post.content.video}></video>}
+              {post.content?.image && (
+                <img src={post.content.image} alt="Post content" />
+              )}
+              {post.content?.video && (
+                <video controls src={post.content.video}></video>
+              )}
             </div>
 
             <div className="post-actions">
               <div className="post-likes">
-                <button onClick={() => handleLikePost(post._id)} className="like-button">
+                <button
+                  onClick={() => handleLikePost(post._id)}
+                  className="like-button"
+                  style={{
+                    background: document.body.classList.contains("dark")
+                      ? "#3a3a3a"
+                      : "white", // اللون في الوضع الليلي والنهاري
+                    color: post.likes.includes(localStorage.getItem("userId"))
+                      ? "red"
+                      : "black", // لون الأيقونة
+                  }}
+                >
                   <FontAwesomeIcon
-                    icon={post.likes.includes(localStorage.getItem('userId')) ? solidHeart : regularHeart}
-                    style={{ color: post.likes.includes(localStorage.getItem('userId')) ? 'red' : 'black' }}
+                    icon={
+                      post.likes.includes(localStorage.getItem("userId"))
+                        ? solidHeart
+                        : regularHeart
+                    }
                   />
                 </button>
-                <span>{post.likes.length} {post.likes.length === 1 ? 'Like' : 'Likes'}</span>
+
+                <span style={{ color: "white" }}>
+                  {post.likes.length}{" "}
+                  {post.likes.length === 1 ? "Like" : "Likes"}
+                </span>
               </div>
-              <button className="delete-post-button" onClick={() => handleDeletePost(post._id)}>
+              <button
+                className="delete-post-button"
+                onClick={() => handleDeletePost(post._id)}
+              >
                 Delete
               </button>
             </div>

@@ -48,22 +48,28 @@ const CreatePost = ({ onPostCreated, onClose }) => {
   return (
     <div className="modal-overlay">
       <div className="modal-container">
-        <button className="close-button" onClick={onClose}>X</button>
+        <button className="close-button" onClick={onClose}>
+          X
+        </button>
         <h2>Create New Post</h2>
         {error && <p className="error">{error}</p>}
         <div className="button-container">
           <button onClick={() => setShowSelectPage(true)}>
-            {selectedPage ? selectedPage.name : 'Select a Page'}
+            {selectedPage ? selectedPage.name : "Select a Page"}
           </button>
           <button className="reset-button" onClick={resetPageSelection}>
             Reset Page
           </button>
         </div>
         {showSelectPage && (
-          <SelectPage onPageSelect={handlePageSelect} onClose={() => setShowSelectPage(false)} />
+          <SelectPage
+            onPageSelect={handlePageSelect}
+            onClose={() => setShowSelectPage(false)}
+          />
         )}
         <form onSubmit={createPost}>
           <input
+            style={{ background: "white" }}
             type="text"
             placeholder="Post Title"
             value={postTitle}
@@ -77,7 +83,9 @@ const CreatePost = ({ onPostCreated, onClose }) => {
             rows="4"
             required
           />
-          <button type="submit">Create Post</button>
+          <button style={{ color: "white" }} type="submit">
+            Create Post
+          </button>
         </form>
       </div>
     </div>
