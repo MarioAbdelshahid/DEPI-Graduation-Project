@@ -15,6 +15,7 @@ router.delete('/deleteCommments/:commentID', authMiddleware, deleteComment);
 
 // Like/Unlike a comment
 router.post('/likeComments/:commentID/like', authMiddleware, commentLike); 
+
 // Fetch comments by post ID
 router.get('/comments/:postID',  getCommentsByPost);
 

@@ -7,6 +7,7 @@ const CommentsList = ({ postId }) => {
   const [content, setContent] = useState('');
   const userId = localStorage.getItem('userId'); // Fetch userId from localStorage
   const token = localStorage.getItem('token'); // Fetch token from localStorage
+  const isAdmin = JSON.parse(localStorage.getItem('isAdmin')); // Fetch isAdmin from localStorage
 
   // Function to fetch comments from the server
   const fetchComments = async () => {
@@ -47,8 +48,8 @@ const CommentsList = ({ postId }) => {
           },
         }
       );
-      setComments([...comments, response.data.comment]);
-      setContent('');
+      setComments(prevComments => [...prevComments, response.data.comment]);
+      setContent(''); // Clear the input after submission
     } catch (error) {
       console.error('Failed to create comment', error);
     }
@@ -58,12 +59,16 @@ const CommentsList = ({ postId }) => {
   const handleDelete = async (commentId) => {
     console.log('Deleting comment', commentId);
     try {
-      await axios.delete(`http://localhost:4000/api/comment/deleteCommments/${commentId}`, {
+      const response = await axios.delete(`http://localhost:4000/api/comment/deleteCommments/${commentId}`, {
         headers: {
           Authorization: `Bearer ${token}`,
         },
       });
-      setComments(comments.filter(comment => comment._id !== commentId));
+
+      if (response.status === 200) {
+        setComments(prevComments => prevComments.filter(comment => comment._id !== commentId));
+        console.log('Comment deleted successfully:', commentId);
+      }
     } catch (error) {
       console.error('Failed to delete comment', error);
     }
@@ -73,7 +78,6 @@ const CommentsList = ({ postId }) => {
   const handleLike = async (commentId) => {
     const updatedComments = comments.map(comment => {
       if (comment._id === commentId) {
-        // Optimistically update the comment in the UI
         const liked = comment.likes.includes(userId);
         return {
           ...comment,
@@ -87,7 +91,6 @@ const CommentsList = ({ postId }) => {
     setComments(updatedComments);
 
     try {
-      // Make the API call to like/unlike the comment
       const response = await axios.post(
         `http://localhost:4000/api/comment/likeComments/${commentId}/like`,
         {},
@@ -125,6 +128,7 @@ const CommentsList = ({ postId }) => {
             onDelete={handleDelete} 
             onLike={handleLike}
             userId={userId} // Pass userId to Comment
+            isAdmin={isAdmin} // Pass isAdmin status to Comment if needed
           />
         ))
       ) : (

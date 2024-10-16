@@ -1,42 +1,59 @@
 .pages-container {
-    display: flex;
-    flex-direction: column;
-    max-width: 600px; /* Limit the width of the container */
-    margin: 0 auto; /* Center the container */
-    padding: 10px; /* Add some padding around the container */
-  }
-  
-  .page-item {
-    display: flex;
-    align-items: center; /* Align items in the center vertically */
-    margin-bottom: 5px; /* Reduced space between pages */
-    padding: 8px; /* Add some padding inside each page item */
-    border: 1px solid #e0e0e0; /* Optional: Add a border for better separation */
-    border-radius: 5px; /* Optional: Add rounded corners */
-    transition: background-color 0.2s; /* Optional: Add a hover effect */
-  }
-  
-  .page-item:hover {
-    background-color: #f5f5f5; /* Optional: Change background on hover */
-  }
-  
-  .page-details {
-    margin-left: 8px; /* Reduced space between the avatar and the text */
-  }
-  
-  .page-name {
-    font-size: 1rem; /* Adjusted font size for a more compact look */
-    margin: 0; /* Remove default margin */
-  }
-  
-  .page-meta {
-    font-size: 0.8rem; /* Smaller text for metadata */
-    color: gray; /* Optional styling for better readability */
-    margin: 2px 0; /* Small margin for better spacing */
-  }
-  
-  .page-description {
-    font-size: 0.75rem; /* Smaller text for description */
-    margin: 2px 0; /* Small margin for better spacing */
-  }
-  
+  display: flex;
+  flex-direction: column;
+  max-width: 600px; /* Limit the width of the container */
+  margin: 0 auto; /* Center the container */
+  padding: 10px; /* Add some padding around the container */
+}
+
+.page-item {
+  display: flex;
+  justify-content: space-between; /* Push delete button to the right */
+  align-items: center; /* Align items in the center vertically */
+  margin-bottom: 5px; /* Reduced space between pages */
+  padding: 8px; /* Add some padding inside each page item */
+  border: 1px solid #e0e0e0; /* Add a border for better separation */
+  border-radius: 5px; /* Add rounded corners */
+  transition: background-color 0.2s; /* Add a hover effect */
+}
+
+.page-item:hover {
+  background-color: #f5f5f5; /* Change background on hover */
+}
+
+.page-info {
+  display: flex; 
+  align-items: center; /* Ensures avatar and text are aligned */
+  flex-grow: 1; /* Allow the page info to grow and take space */
+  text-decoration: none; /* Removes underline on link */
+}
+
+.page-details {
+  margin-left: 8px; /* Space between the avatar and the text */
+}
+
+.page-name {
+  font-size: 1rem; /* Adjusted font size for a more compact look */
+  margin: 0; /* Remove default margin */
+}
+
+.page-meta {
+  font-size: 0.8rem; /* Smaller text for metadata */
+  color: gray; /* Optional styling for better readability */
+  margin: 2px 0; /* Small margin for better spacing */
+}
+
+.page-description {
+  font-size: 0.75rem; /* Smaller text for description */
+  margin: 2px 0; /* Small margin for better spacing */
+}
+
+.delete-page-button {
+  color: white; /* White text */
+  border: none; /* Remove borders */
+  padding: 5px 10px; /* Reduced padding for a compact button */
+  cursor: pointer; /* Pointer cursor on hover */
+  border-radius: 4px; /* Rounded corners */
+  margin-left: 10px; /* Space between text and button */
+  transition: background-color 0.3s ease; /* Smooth hover effect */
+}

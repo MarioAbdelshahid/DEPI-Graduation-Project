@@ -1,0 +1,41 @@
+.comment {
+    border: 1px solid #ccc;
+    padding: 10px;
+    margin-bottom: 10px;
+  }
+  
+  .comment-header {
+    display: flex;
+    align-items: center; /* Vertically center the items */
+    margin-bottom: 5px; /* Space between header and content */
+  }
+  
+  .comment-user-info {
+    display: flex;
+    align-items: center; /* Center avatar and name vertically */
+    justify-content: space-between; /* Space out elements horizontally */
+    flex-grow: 1; /* Allow user info to take available space */
+  }
+  
+  
+  .comment-user-name {
+    margin-left: 10px; /* Spacing between avatar and name */
+    font-weight: bold; /* Make name bold */
+  }
+  
+  .comment-date {
+    font-size: 0.9em;
+    color: gray;
+    margin-left: auto; /* Push date to the right */
+  }
+  
+  .comment-content {
+    margin-top: 5px;
+  }
+  
+  .comment-actions {
+    display: flex;
+    align-items: center;
+    margin-top: 10px;
+  }
+  

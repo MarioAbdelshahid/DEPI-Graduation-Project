@@ -30,38 +30,46 @@ exports.createPost = async (req, res) => {
   }
 };
 
-// Delete a post
 exports.deletePost = async (req, res) => {
   try {
     const postId = req.params.postID;
+
     const post = await Post.findById(postId);
-    
+
     if (!post) {
       return res.status(404).json({ message: 'Post not found' });
     }
 
-    // Check if the user is authorized to delete the post
-    if (post.postedBy.toString() !== req.user.id) {
+    // Check if the user is admin or the post creator
+    if (req.user.isAdmin || post.postedBy.toString() === req.user.id) {
+      // Fetch all comments associated with the post
+      const comments = await Comment.find({ post: post._id });
+
+      // Delete all comments associated with the post
+      for (const comment of comments) {
+        await Comment.deleteOne({ _id: comment._id });
+      }
+
+      // Delete the post
+      await Post.deleteOne({ _id: postId });
+      return res.json({ message: 'Post deleted successfully' });
+    } else {
       return res.status(403).json({ message: 'Not authorized to delete this post' });
     }
-
-    await post.remove();
-    res.status(200).json({ message: 'Post deleted successfully' });
   } catch (error) {
     console.error('Error deleting post:', error);
-    res.status(500).json({ error: 'Server error: Failed to delete post' });
+    res.status(500).json({ error: 'Server error: Failed to delete post', details: error.message });
   }
 };
-
-
-
 
 
 // Like/Unlike a post
 exports.postLike = async (req, res) => {
   try {
     const userId = req.user.id; // Get the authenticated user's ID
-    const post = await Post.findById(req.params.postID).populate('likes', 'name profilePicture'); // Populate likes to get user details
+    let post = await Post.findById(req.params.postID)
+      .populate('likes', 'name profilePicture')  // Populate likes to get user details
+      .populate('postedBy', 'name profilePicture'); // Populate postedBy to get author's details
 
     if (!post) {
       return res.status(404).json({ message: 'Post not found' });
@@ -71,21 +79,28 @@ exports.postLike = async (req, res) => {
     if (!post.likes.some(like => like._id.toString() === userId)) {
       // If user didn't like the post, like it
       post.likes.push(userId);
-      await post.save();
-      await post.populate('likes', 'name profilePicture'); // Re-populate likes after saving
-      return res.json({ message: 'Post liked', post });
     } else {
       // If user did like the post, unlike it
       post.likes = post.likes.filter(like => like._id.toString() !== userId);
-      await post.save();
-      await post.populate('likes', 'name profilePicture'); // Re-populate likes after saving
-      return res.json({ message: 'Post unliked', post });
     }
+
+    // Save the updated post
+    await post.save();
+
+    // Re-populate likes and postedBy fields after saving
+    post = await Post.findById(req.params.postID)
+      .populate('likes', 'name profilePicture')
+      .populate('postedBy', 'name profilePicture');
+
+    // Return the updated post with populated fields
+    return res.json({ message: post.likes.some(like => like._id.toString() === userId) ? 'Post liked' : 'Post unliked', post });
+
   } catch (error) {
     console.error('Error liking post:', error); // Log the error for debugging
     res.status(500).json({ error: 'Server error: Failed to like post' });
   }
 };
+
 
 
 exports.getPosts = async (req, res) => {

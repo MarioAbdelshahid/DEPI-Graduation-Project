@@ -1,25 +1,29 @@
+/* Container for the posts section */
 .posts-container {
-    max-width: 800px; 
-    margin: 20px auto; 
+    max-width: 800px;
+    margin: 20px auto;
     padding: 20px;
-    border-radius: 8px; 
+    border-radius: 8px;
     background-color: #f8f9fa;
-    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1); 
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
 }
 
+/* Styling each individual post */
 .post {
-    margin-bottom: 20px; 
+    margin-bottom: 20px;
     padding: 20px;
-    border-radius: 8px; 
+    border-radius: 8px;
     background-color: white;
     box-shadow: 0 1px 5px rgba(0, 0, 0, 0.1);
-    transition: transform 0.2s; 
+    transition: transform 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
 }
 
 .post:hover {
-    transform: translateY(-2px); 
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
 }
 
+/* Post header layout */
 .post-header-container {
     display: flex;
     justify-content: space-between;
@@ -27,6 +31,7 @@
     margin-bottom: 10px;
 }
 
+/* User info (profile picture and name) layout */
 .post-user-info {
     display: flex;
     align-items: center;
@@ -37,7 +42,7 @@
     display: flex;
     flex-direction: column;
     margin-left: 10px;
-    flex-grow: 1; /* This will push the date to the far right */
+    flex-grow: 1; /* Ensures the date is pushed to the far right */
 }
 
 .post-user-name {
@@ -49,9 +54,10 @@
     font-size: 0.9rem;
     color: #777;
     text-align: right;
-    margin-left: auto; /* Ensures the date is at the far right */
+    margin-left: auto; /* Ensures the date aligns to the right */
 }
 
+/* Post title and content */
 .post-header {
     font-size: 1.5rem;
     color: #333;
@@ -71,12 +77,14 @@
     margin-top: 10px;
 }
 
+/* No posts message */
 .no-posts {
     text-align: center;
     font-size: 1.2rem;
     color: #777;
 }
 
+/* Comment section styling */
 .comments-container {
     margin-top: 20px;
 }
@@ -91,22 +99,65 @@
 .comment p {
     margin: 5px 0;
 }
+
+/* Post action styles (like button and delete button) */
+.post-actions {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 10px;
+}
+
 .post-likes {
     display: flex;
     align-items: center;
-    margin-top: 10px;
-  }
-  
-  .post-likes button {
-    background-color: #007bff;
+}
+
+.like-button {
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 0;
+    font-size: 24px; /* Size of the heart icon */
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    margin-right: 8px;
+    transition: transform 0.2s ease;
+}
+
+.like-button:hover {
+    transform: scale(1.2); /* Slight enlarge effect on hover */
+}
+
+.post-likes span {
+    font-size: 1rem;
+    color: #555;
+}
+
+/* Delete post button */
+.delete-post-button {
     color: white;
     border: none;
     padding: 5px 10px;
     border-radius: 5px;
     cursor: pointer;
-  }
-  
-  .post-likes button:hover {
-    background-color: #0056b3;
-  }
-  
+    font-size: 0.9rem;
+    transition: background-color 0.2s ease;
+}
+
+
+/* Loading spinner for fetching data */
+.loading-spinner {
+    text-align: center;
+    font-size: 1.2rem;
+    color: #007bff;
+}
+
+/* Error message when something goes wrong */
+.error-message {
+    text-align: center;
+    color: #dc3545;
+    font-size: 1.2rem;
+    margin: 20px 0;
+}
