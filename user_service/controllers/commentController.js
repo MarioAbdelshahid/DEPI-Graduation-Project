@@ -32,7 +32,7 @@ exports.createComment = async (req, res) => {
 // Delete a comment
 exports.deleteComment = async (req, res) => {
   try {
-    const { commentID } = req.params.commentID;
+    const { commentID } = req.params; // Correctly accessing commentID from req.params
     const comment = await Comment.findById(commentID).populate('post'); // Populating the post field to access its details
     const user = await User.findById(req.user.id);
 
@@ -40,14 +40,19 @@ exports.deleteComment = async (req, res) => {
       return res.status(404).json({ message: 'Comment not found' });
     }
 
-    // Find the post and the page associated with the comment
-    const post = await Post.findById(comment.post._id).populate('page');
-    const page = post.page ? await Page.findById(post.page) : null;
+    // Find the post associated with the comment
+    const post = comment.post ? await Post.findById(comment.post._id).populate('page') : null;
+    const page = post && post.page ? await Page.findById(post.page) : null;
 
-    // Check if the user is authorized to delete the post
-    if (user.isAdmin || page && page.createdBy.toString() === req.user.id || post.createdBy.toString() === req.user.id || comment.createdBy.toString() === req.user.id) {
+    // Check if the user is authorized to delete the comment
+    if (
+      user.isAdmin ||
+      (page && page.createdBy && page.createdBy.toString() === req.user.id) ||
+      (post && post.createdBy && post.createdBy.toString() === req.user.id) ||
+      (comment.createdBy && comment.createdBy.toString() === req.user.id)
+    ) {
       await Comment.findByIdAndDelete(commentID);
-      return res.status(200).json({ message: 'Comment deleted succesfully' });
+      return res.status(200).json({ message: 'Comment deleted successfully' });
     } else {
       return res.status(403).json({ message: 'Unauthorized to delete this comment' });
     }
@@ -60,35 +65,38 @@ exports.deleteComment = async (req, res) => {
 
 
 
+
+
 // Like/Unlike a comment
 exports.commentLike = async (req, res) => {
   try {
+    // Find the comment by ID
     const comment = await Comment.findById(req.params.commentID);
-    if (!comment) return res.status(404).json({ message: 'Comment not found' });
+    if (!comment) {
+      return res.status(404).json({ message: 'Comment not found' });
+    }
 
-    const userId = req.user.id;
+    const userId = req.user.id; // Assuming user ID is set by auth middleware
 
+    // Check if the user has already liked the comment
     if (!comment.likes.includes(userId)) {
-
-      // If the user has not liked the comment, like it
-
+      // Like the comment
       comment.likes.push(userId);
       await comment.save();
-      return res.json({ message: 'Comment liked', comment });
+      return res.json({ message: 'Comment liked', comment }); // Return the updated comment
     } else {
-
-      // If the user has already liked the comment, unlike it
-
+      // Unlike the comment
       comment.likes = comment.likes.filter(id => id.toString() !== userId);
       await comment.save();
-      return res.json({ message: 'Comment unliked', comment });
+      return res.json({ message: 'Comment unliked', comment }); // Return the updated comment
     }
 
   } catch (error) {
-    console.error(error);
-    res.status(500).json({ error: 'Server error: Failed to like/unlike comment' });
+    console.error('Error liking/unliking comment:', error); // Improved logging
+    return res.status(500).json({ error: 'Server error: Failed to like/unlike comment' });
   }
 };
+
 
 exports.getCommentsByPost = async (req, res) => {
   try {

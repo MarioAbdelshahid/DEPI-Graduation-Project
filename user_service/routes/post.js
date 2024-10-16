@@ -11,7 +11,7 @@ const router = express.Router();
 router.post('/createPost', authMiddleware, createPost); 
 
 // Delete a post
-router.delete('/deletePost/:postID', authMiddleware, deletePost); 
+router.delete('/deletePost/:postID', authMiddleware, deletePost);
 
 // Like/Unlike a post
 router.post('/likePost/:postID/like', authMiddleware, postLike); 

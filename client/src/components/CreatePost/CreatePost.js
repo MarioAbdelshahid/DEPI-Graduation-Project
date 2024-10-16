@@ -27,9 +27,6 @@ const CreatePost = ({ onPostCreated, onClose }) => {
           Authorization: `Bearer ${token}`,
         },
       });
-      const postId = response.data.id;
-      console.log('created', postId);
-      localStorage.setItem('createdPostId', postId);
       setPostTitle('');
       setPostContent('');
       setSelectedPage(null); // Clear selected page after post creation
